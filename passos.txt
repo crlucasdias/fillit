@@ -1,0 +1,14 @@
+Passo a passo para fazer o Fillit:
+
+
+-------------------------------------
+
+1 - Verifica se a linha eh valida.
+
+2 - Se for valida, mapeia o character
+
+3 - Pega hash a hash e monta o array.
+
+4 - Cria um mapa vazio.
+
+--------------------------------------
