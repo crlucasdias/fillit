@@ -6,7 +6,7 @@
 /*   By: lbeserra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/19 15:19:08 by lbeserra          #+#    #+#             */
-/*   Updated: 2019/03/21 19:26:53 by lbeserra         ###   ########.fr       */
+/*   Updated: 2019/02/27 22:03:10 by lbeserra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	if (!str)
 		return (NULL);
 	aux = len_aux + len_aux2;
-	while (i < aux)
+	while (s1[i] || s2[i])
 	{
 		if (i < len_aux)
 			str[i] = s1[i];
