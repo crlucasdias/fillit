@@ -6,7 +6,7 @@ SRC =  $(wildcard *.c) \
 
 OBJ = $(SRC:.c=.o)
 
-FLAG = gcc  
+FLAG = gcc
 
 all:	$(OBJ) 
 		$(FLAG) $(SRC)

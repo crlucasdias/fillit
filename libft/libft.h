@@ -6,7 +6,7 @@
 /*   By: lbeserra <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/02/13 18:05:20 by lbeserra          #+#    #+#             */
-/*   Updated: 2019/02/28 00:36:25 by lbeserra         ###   ########.fr       */
+/*   Updated: 2019/04/16 19:37:04 by lbeserra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ char				*ft_strtrim(char const *s);
 char				**ft_strsplit(char const *s, char c);
 void				ft_striter(char *s, void (*f)(char *));
 void				ft_striteri(char *s, void (*f)(unsigned int, char *));
+char    			*ft_realloc(char *str, size_t size);
 char				*ft_strmap(char const *s, char (*f)(char));
 char				*ft_strmapi(char const *s, char (*f)(unsigned int, char));
 char				*ft_strnstr(const char *big,

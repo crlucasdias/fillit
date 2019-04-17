@@ -9,7 +9,7 @@
 typedef struct l_tetriminos
 {
     char character;
-    int tetrimino[4];
+    int **tetrimino;
     struct l_tetriminos *next;
 } l_tetriminos;
 

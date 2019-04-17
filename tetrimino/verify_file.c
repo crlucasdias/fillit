@@ -54,7 +54,9 @@ int verify_file(int fd)
         data[aux] = '\0';
         if(verify_current_buffer(data))
         {
+            
             create_tetrimino(&list_tetriminos, character,data);
+            return (0);
            //printf("Character: %c \n", list_tetriminos->character);
         }
         else
@@ -64,12 +66,15 @@ int verify_file(int fd)
         }
         character += 1;
     }
-    printf("COmecnado: \n");
+
+    
+   /// printf("COmecnado: \n");
     while(list_tetriminos)
     {
-        printf("Character: %c \n", list_tetriminos->character);
+    //    printf("Character: %c \n", list_tetriminos->character);
         list_tetriminos = list_tetriminos->next;
     }
+    
     return 1;
 }
 
