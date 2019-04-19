@@ -13,6 +13,19 @@ l_tetriminos *list_add(l_tetriminos *lst, char character)
     return (lst);
 }
 
+int get_list_size(l_tetriminos *lst)
+{
+    int i;
+
+    i = 0;
+    while(lst)
+    {
+        lst = lst->next;
+        i++;
+    }
+    return (i);
+}
+
 int get_count_lines_tetrimino(char *data)
 {
     int count_lines;
@@ -65,9 +78,8 @@ void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
     }
 }
 
-int     get_tetrimino(l_tetriminos *lst, char *data)
+char     **get_tetrimino(char **tmp_arr, char *data)
 {
-    char **tmp_arr;
     int count_lines;
     int i;
 
@@ -82,10 +94,37 @@ int     get_tetrimino(l_tetriminos *lst, char *data)
         tmp_arr[i] = 0;
         i++;
     }
-    cria_array_por_linha(tmp_arr, data, '0');
-    print_array(tmp_arr);
-    return (1);
+    cria_array_por_linha(tmp_arr, data, '0'); //colocar exit se error.
+    return (tmp_arr);
 }
+
+void create_tetrimino(l_tetriminos **lst, char character, char *data)
+{
+    l_tetriminos *tmp;
+    char **tetrim;
+
+    if(!*lst)   
+    {   
+        *lst = list_add(*lst, character);
+        (*lst)->tetrimino = get_tetrimino(tetrim,data);
+        return;
+    }
+    tmp = *lst;
+    while(tmp)
+    {
+        if(tmp->next)
+            tmp = tmp->next;
+        else
+        {
+            tmp->next = list_add(tmp->next,character);
+            tmp = tmp->next;
+            tmp->tetrimino = get_tetrimino(tetrim,data);
+            break;
+        }
+    }
+}
+
+
 
 //chama funcao pra criar
 //se nao existir tetrimino[count_line][0] = malloc
@@ -195,47 +234,6 @@ int     get_tetrimino(l_tetriminos *lst, char *data)
         ..x.
 
     */
-
-
-int get_list_size(l_tetriminos *lst)
-{
-    int i;
-
-    i = 0;
-    while(lst)
-    {
-        lst = lst->next;
-        i++;
-    }
-    return (i);
-}
-
-void create_tetrimino(l_tetriminos **lst, char character, char *data)
-{
-    l_tetriminos *tmp;
-
-    if(!*lst)   
-     {   
-         *lst = list_add(*lst, character);
-         get_tetrimino(*lst,data);
-         return;
-     }
-    tmp = *lst;
-    while(tmp)
-    {
-        if(tmp->next)
-            tmp = tmp->next;
-        else
-        {
-            tmp->next = list_add(tmp->next,character);
-            tmp = tmp->next;
-            break;
-        }
-    }
-    get_tetrimino(tmp,data);
-    //printf("###### PROXIMO ####### \n\n\n");
-}
-
 
 
 

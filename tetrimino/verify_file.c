@@ -56,7 +56,7 @@ int verify_file(int fd)
         {
             
             create_tetrimino(&list_tetriminos, character,data);
-            return (0);
+            //return (0);
            //printf("Character: %c \n", list_tetriminos->character);
         }
         else
@@ -71,8 +71,10 @@ int verify_file(int fd)
    /// printf("COmecnado: \n");
     while(list_tetriminos)
     {
-    //    printf("Character: %c \n", list_tetriminos->character);
+        print_array(list_tetriminos->tetrimino);
+        //printf("Character: %c \n", list_tetriminos->character);
         list_tetriminos = list_tetriminos->next;
+        printf("Next.. \n");
     }
     
     return 1;

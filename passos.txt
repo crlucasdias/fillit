@@ -1,6 +1,8 @@
 Notas:
 
-cria_new_array
+Alterar nome das funcoes e variaveis, alem de dividir por file.
 
-se deu merda, dar free em tudo.
+Decidir como os dados vao ser passados, por array com ft_atoi no solver ou oq
 
+
+Fazer algumas validacoes apos criacao y tals
