@@ -4,18 +4,31 @@ void    print_map(char **map)
 {
 	int i = 0;
 	int j = 0;
-	int count = 0;
-	printf("Printando... \n");
 	while(map[i])
 	{
 		while(map[i][j])
 		{
 			printf("%c",map[i][j]);
 			j++;
-			count++;
 		}
 		j = 0;
 		i++;
 	}
-	//printf("\n Count: %d \n", count);
+}
+
+void	print_array(char **tmp_arr)
+{
+	int i = 0;
+    int j = 0;
+   //printf("Tmp[1][0] %c",tmp_arr[1][0]);
+        while(tmp_arr[i])
+        {
+            while(tmp_arr[i][j])
+            {
+                printf("I: %d  J: %d, tmp[%d][%d]: Valor: %c \n", i,j,i,j, tmp_arr[i][j]);
+                j++;
+            }
+            i++;
+            j = 0;
+        }
 }

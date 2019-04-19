@@ -45,54 +45,29 @@ void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
     i = 0;
     current_count_line = 0;
     characters = 0;
-    
     int aux = 0;
-
     while(data[i])
     {
         if(data[i] == TETRIMINO_CHARACTER)   
         {
-            //problema: aqui na alocacao de memoria do character.
             tmp_arr[current_count_line] = ft_realloc(tmp_arr[current_count_line], characters + 2);
-           // printf("Characteres alocados (characters + 1): %d \n", characters + 2); 
+            //if deu merda, free tudo. --doit
             tmp_arr[current_count_line][characters] = keep_track;
-            // printf("Count: %d  tmp_arr[%d][%d] Valor: %c \n", current_count_line, current_count_line, characters, tmp_arr[current_count_line][characters]);
-            //printf("\n\n");
             characters++;
             aux = 1;
-            //Problema: Quando ele muda de linha, ele nao comeca com 0, passa a comecar com 
         }
-        if(data[i] == '\n')
+        if(data[i] == '\n' && tmp_arr[current_count_line])
         {
-            if(aux != 0)
-            {
-                current_count_line += 1;
-                characters = 0;
-            }
-            keep_track = '0';
+            current_count_line += 1;
+            characters = 0;
         }
-        else
-            keep_track++;
+        keep_track = (data[i] == '\n') ? keep_track = '0' : ++keep_track;
         i++;
     }
-    printf("Current count line: %d \n", current_count_line - 1);
+}
     //tmp_arr[current_count_line - 1] = NULL;
    
     /* verificando se ta tudo certo*/
-    i = 0;
-    int j = 0;
-   //printf("Tmp[1][0] %c",tmp_arr[1][0]);
-    while(tmp_arr[i])
-    {
-        while(tmp_arr[i][j])
-        {
-            printf("I: %d  J: %d, tmp[%d][%d]: Valor: %c \n", i,j,i,j, tmp_arr[i][j]);
-            j++;
-        }
-        i++;
-        j = 0;
-    }
-}
 
 
 int     get_tetrimino(l_tetriminos *lst, char *data)
@@ -113,7 +88,7 @@ int     get_tetrimino(l_tetriminos *lst, char *data)
         i++;
     }
     cria_array_por_linha(tmp_arr, data, '0');
-     
+    print_array(tmp_arr);
     return (1);
 }
 

@@ -18,3 +18,4 @@ void create_tetrimino(l_tetriminos **lst, char character, char *data);
 l_tetriminos *list_add(l_tetriminos *lst, char character);
 char **create_map(char character, int size_per_line);
 void    print_map(char **map);
+void	print_array(char **tmp_arr);
