@@ -2,8 +2,8 @@ NAME = bg
 
 SRC =  $(wildcard *.c) \
 	   $(wildcard libft/*.c) \
-	   $(wildcard tetrimino/*.c)
-
+	   $(wildcard tetrimino/*.c) \
+	   $(wildcard map/*.c)
 OBJ = $(SRC:.c=.o)
 
 FLAG = gcc

@@ -6,9 +6,13 @@ char    *ft_realloc(char *str, size_t size)
     int i = 0;
     
     new_str = malloc(size);
+    ft_bzero(new_str,size);
     if(!new_str)
         return (0);
-    ft_strncpy(new_str, str, size);
-    free(str);
+    if(str)
+    {
+        ft_strncpy(new_str, str, size);
+        free(str);
+    }
     return new_str;
 }

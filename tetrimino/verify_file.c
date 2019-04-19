@@ -2,12 +2,12 @@
 
 int is_valid_tetrimino_count(int dots, int hash)
 {
-    int size_dots_we_want;
+    int total_dots;
 
-    size_dots_we_want = BUFFER_FILE - (BUFFER_FILE / SIZE_PER_LINE) - HASH_SIZE;
+    total_dots = BUFFER_FILE - (BUFFER_FILE / DOTS_PER_LINE) - HASH_SIZE;
     if(hash != HASH_SIZE)
         return(0);
-    if(dots != size_dots_we_want)
+    if(dots != total_dots)
         return(0);
     return (1);
 }

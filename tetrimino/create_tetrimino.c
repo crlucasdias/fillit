@@ -38,26 +38,35 @@ int get_count_lines_tetrimino(char *data)
 
 void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
 {
-    int count_lines;
+    int current_count_line;
     int characters;
     int i;
 
     i = 0;
-    count_lines = 0;
+    current_count_line = 0;
     characters = 0;
+    
+    int aux = 0;
+
     while(data[i])
     {
         if(data[i] == TETRIMINO_CHARACTER)   
         {
-            tmp_arr[count_lines] = ft_realloc(tmp_arr[count_lines], characters + 1); 
-            tmp_arr[count_lines][characters] = keep_track;
+            //problema: aqui na alocacao de memoria do character.
+            tmp_arr[current_count_line] = ft_realloc(tmp_arr[current_count_line], characters + 2);
+           // printf("Characteres alocados (characters + 1): %d \n", characters + 2); 
+            tmp_arr[current_count_line][characters] = keep_track;
+            // printf("Count: %d  tmp_arr[%d][%d] Valor: %c \n", current_count_line, current_count_line, characters, tmp_arr[current_count_line][characters]);
+            //printf("\n\n");
             characters++;
+            aux = 1;
+            //Problema: Quando ele muda de linha, ele nao comeca com 0, passa a comecar com 
         }
         if(data[i] == '\n')
         {
-            if(tmp_arr[count_lines][0] != '\0')
+            if(aux != 0)
             {
-                count_lines += 1;
+                current_count_line += 1;
                 characters = 0;
             }
             keep_track = '0';
@@ -66,12 +75,13 @@ void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
             keep_track++;
         i++;
     }
-
+    printf("Current count line: %d \n", current_count_line - 1);
+    //tmp_arr[current_count_line - 1] = NULL;
+   
     /* verificando se ta tudo certo*/
     i = 0;
     int j = 0;
-    printf("Tmp[1][0] %c",tmp_arr[1][1]);
-    return;
+   //printf("Tmp[1][0] %c",tmp_arr[1][0]);
     while(tmp_arr[i])
     {
         while(tmp_arr[i][j])
@@ -89,13 +99,9 @@ int     get_tetrimino(l_tetriminos *lst, char *data)
 {
     char **tmp_arr;
     int count_lines;
-    int characters;
-    int keep_track;
     int i;
 
-    count_lines = get_count_lines_tetrimino(data);
-    characters = 0;
-    keep_track = 0;
+    count_lines = get_count_lines_tetrimino(data) + 1;
     i = 0;
     tmp_arr = (char **)malloc(count_lines * sizeof(char*));
     if(!tmp_arr)
@@ -103,6 +109,7 @@ int     get_tetrimino(l_tetriminos *lst, char *data)
     while(i < count_lines)
     {
         tmp_arr[i] = malloc(sizeof(char));
+        tmp_arr[i] = 0;
         i++;
     }
     cria_array_por_linha(tmp_arr, data, '0');
