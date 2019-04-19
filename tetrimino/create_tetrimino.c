@@ -45,16 +45,15 @@ void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
     i = 0;
     current_count_line = 0;
     characters = 0;
-    int aux = 0;
+
     while(data[i])
     {
         if(data[i] == TETRIMINO_CHARACTER)   
         {
             tmp_arr[current_count_line] = ft_realloc(tmp_arr[current_count_line], characters + 2);
-            //if deu merda, free tudo. --doit
-            tmp_arr[current_count_line][characters] = keep_track;
-            characters++;
-            aux = 1;
+            if(!tmp_arr[current_count_line])
+                exit(0);
+            tmp_arr[current_count_line][characters++] = keep_track;
         }
         if(data[i] == '\n' && tmp_arr[current_count_line])
         {
@@ -65,10 +64,6 @@ void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
         i++;
     }
 }
-    //tmp_arr[current_count_line - 1] = NULL;
-   
-    /* verificando se ta tudo certo*/
-
 
 int     get_tetrimino(l_tetriminos *lst, char *data)
 {

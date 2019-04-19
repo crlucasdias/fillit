@@ -12,17 +12,15 @@
 
 #include "libft.h"
 
-void	ft_free_array(char **arr, size_t size)
+void	ft_free_multidimensional_array(char **arr)
 {
-	size_t n;
-
-	n = 0;
-	while (n < size)
+	size_t i;
+	
+	i = 0;
+	while(arr[i])
 	{
-		free(arr[n]);
-		arr[n] = NULL;
-		n++;
-	}
-	free(arr);
-	arr = NULL;
+		free(arr[i]);
+		i++;
+    }
+    free(arr);
 }

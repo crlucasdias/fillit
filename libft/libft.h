@@ -93,7 +93,7 @@ void				ft_lstiter(t_list *lst, void (*f)(t_list *elem));
 t_list				*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem));
 
 char				*ft_assign_value(const char *s, char *s2, int i, int j);
-void				ft_free_array(char **arr, size_t size);
+void				ft_free_multidimensional_array(char **arr);
 int					ft_is_pair(size_t num, size_t i);
 char				*ft_strrev(char *str1);
 void				ft_endl();
