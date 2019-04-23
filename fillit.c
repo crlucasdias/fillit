@@ -14,5 +14,7 @@ int main()
     //print_map(map);
     verify_file(fd);
     return (0);
+
+    //
 }
 
