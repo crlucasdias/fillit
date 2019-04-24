@@ -224,8 +224,8 @@ if - ok -> Return data. (fd)
 2.1 -> create_tetriminos
 2.2 -> tetrimino_to_list
 2.3 -> list_add
-2.4 -> get_tetrimino (will add correct tetrimino to list)
-2.5 -> do_magic();
+2.4 -> create_tetrimino (will add correct tetrimino to list)
+2.5 -> build_tetrimino_array();
 
 
 

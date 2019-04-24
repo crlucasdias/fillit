@@ -1,12 +1,14 @@
 #include "../fillit.h"
 
-l_tetriminos *create_list_tetriminos(char *data, l_tetriminos *list_tetriminos)
+l_tetriminos *create_list_tetriminos(char *data)
 {
+    l_tetriminos *list_tetriminos;
     char character;
     char *tmp;
     int i;
     int aux;
 
+    list_tetriminos = NULL;
     character = 'A';
     i = 0;
     aux = 0;
