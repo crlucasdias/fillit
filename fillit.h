@@ -13,9 +13,16 @@ typedef struct l_tetriminos
     struct l_tetriminos *next;
 } l_tetriminos;
 
-int verify_file(int fd);
-void create_tetrimino(l_tetriminos **lst, char character, char *data);
-l_tetriminos *list_add(l_tetriminos *lst, char character);
-char **create_map(char character, int size_per_line);
-void    print_map(char **map);
-void	print_array(char **tmp_arr);
+char            *verify_file(int fd);
+int             is_valid_tetrimino_count(int dots, int hash);
+int             verify_current_buffer(char *data);
+l_tetriminos    *list_add(l_tetriminos *lst, char character);
+int             get_list_size(l_tetriminos *lst);
+int             get_count_lines_tetrimino(char *data);
+l_tetriminos    *create_list_tetriminos(char *data, l_tetriminos *list_tetriminos);
+void            tetrimino_to_list(l_tetriminos **lst, char character, char *data);
+char            **create_tetrimino(char **tmp_arr, char *data);
+void            build_tetrimino_array(char **tmp_arr, char *data, char keep_track);
+char            **create_map(char character, int size_per_line);
+void            print_map(char **map);
+void	        print_array(char **tmp_arr);

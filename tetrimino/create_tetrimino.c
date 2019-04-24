@@ -1,55 +1,76 @@
 #include "../fillit.h"
 
-
-//gcc fillit.c tetrimino/*.c libft/*.c 
-
-l_tetriminos *list_add(l_tetriminos *lst, char character)
+l_tetriminos *create_list_tetriminos(char *data, l_tetriminos *list_tetriminos)
 {
-    lst = malloc(sizeof(l_tetriminos));
-    if(!lst)
-        return (0);
-    lst->character = character;
-    lst->next = NULL;
-    return (lst);
-}
-
-int get_list_size(l_tetriminos *lst)
-{
+    char character;
+    char *tmp;
     int i;
+    int aux;
 
+    character = 'A';
     i = 0;
-    while(lst)
-    {
-        lst = lst->next;
-        i++;
-    }
-    return (i);
-}
-
-int get_count_lines_tetrimino(char *data)
-{
-    int count_lines;
-    int found_tetrimino_character;
-    int i = 0;
-
-    count_lines = 0;
-    found_tetrimino_character = 0;
-    i = 0;
+    aux = 0;
     while(data[i])
     {
-        if(data[i] == TETRIMINO_CHARACTER)
-            found_tetrimino_character = 1;
-        if(data[i] == '\n' && found_tetrimino_character == 1)
+        if(data[i] == '\n' && data[i + 1] == '\n')
         {
-            count_lines++;
-            found_tetrimino_character = 0;
+            tmp = ft_strsub(data, aux, i - aux);
+            tetrimino_to_list(&list_tetriminos, character, tmp);
+            aux = i + 2;
+            character += 1;
         }
         i++;
     }
-    return count_lines;
+    return list_tetriminos;
 }
 
-void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
+void    tetrimino_to_list(l_tetriminos **lst, char character, char *data)
+{
+    l_tetriminos *tmp;
+    char **tetrim;
+
+    if(!*lst)   
+    {   
+        *lst = list_add(*lst, character);
+        (*lst)->tetrimino = create_tetrimino(tetrim,data);
+        return;
+    }
+    tmp = *lst;
+    while(tmp)
+    {
+        if(tmp->next)
+            tmp = tmp->next;
+        else
+        {
+            tmp->next = list_add(tmp->next,character);
+            tmp = tmp->next;
+            tmp->tetrimino = create_tetrimino(tetrim,data);
+            break;
+        }
+    }
+}
+
+char     **create_tetrimino(char **tmp_arr, char *data)
+{
+    int count_lines;
+    int i;
+
+    count_lines = get_count_lines_tetrimino(data) + 1;
+    i = 0;
+    tmp_arr = (char **)malloc(count_lines * sizeof(char*));
+    if(!tmp_arr)
+        return (0);
+    while(i < count_lines)
+    {
+        tmp_arr[i] = malloc(sizeof(char));
+        tmp_arr[i] = 0;
+        i++;
+    }
+    build_tetrimino_array(tmp_arr, data, '0');
+    return (tmp_arr);
+}
+
+void    build_tetrimino_array(char **tmp_arr, char *data, char keep_track)
 {
     int current_count_line;
     int characters;
@@ -77,48 +98,3 @@ void    cria_array_por_linha(char **tmp_arr, char *data, char keep_track)
     }
 }
 
-char     **get_tetrimino(char **tmp_arr, char *data)
-{
-    int count_lines;
-    int i;
-
-    count_lines = get_count_lines_tetrimino(data) + 1;
-    i = 0;
-    tmp_arr = (char **)malloc(count_lines * sizeof(char*));
-    if(!tmp_arr)
-        return (0);
-    while(i < count_lines)
-    {
-        tmp_arr[i] = malloc(sizeof(char));
-        tmp_arr[i] = 0;
-        i++;
-    }
-    cria_array_por_linha(tmp_arr, data, '0'); //colocar exit se error.
-    return (tmp_arr);
-}
-
-void create_tetrimino(l_tetriminos **lst, char character, char *data)
-{
-    l_tetriminos *tmp;
-    char **tetrim;
-
-    if(!*lst)   
-    {   
-        *lst = list_add(*lst, character);
-        (*lst)->tetrimino = get_tetrimino(tetrim,data);
-        return;
-    }
-    tmp = *lst;
-    while(tmp)
-    {
-        if(tmp->next)
-            tmp = tmp->next;
-        else
-        {
-            tmp->next = list_add(tmp->next,character);
-            tmp = tmp->next;
-            tmp->tetrimino = get_tetrimino(tetrim,data);
-            break;
-        }
-    }
-}

@@ -210,3 +210,35 @@ is_valid_file();
 if (is_valid_file = return read
 
 dai, treta com tetriminos e faz oq tem de ser feito.
+
+
+Como o codigo rola:
+
+
+1 - Verify file
+
+if - ok -> Return data. (fd)
+
+2 - Create tetriminos (cria uma lista de tetriminos)
+
+2.1 -> create_tetriminos
+2.2 -> tetrimino_to_list
+2.3 -> list_add
+2.4 -> get_tetrimino (will add correct tetrimino to list)
+2.5 -> do_magic();
+
+
+
+
+/* cria a lista e percorre. */
+
+    /* printa lista .. debug 
+   /// printf("COmecnado: \n");
+    while(list_tetriminos)
+    {
+    //    print_array(list_tetriminos->tetrimino);
+        //printf("Character: %c \n", list_tetriminos->character);
+        list_tetriminos = list_tetriminos->next;
+      //  printf("Next.. \n");
+    }
+    */
