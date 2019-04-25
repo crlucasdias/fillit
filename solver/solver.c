@@ -5,6 +5,22 @@ int  is_square()
     return (0);
 }
 
+
+//Problema:
+
+/*
+
+Quando o valor comeca na esquerda, o programa quebra.
+
+exemplo:
+
+.#..
+###.
+
+coisa legal:
+
+o mapeamento esta funcionando corretamente, ou seja, talvez consiga resolver.
+*/
 int  try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
 {
     int row;
@@ -12,7 +28,17 @@ int  try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
     int aux;
 
     row = 0;
-    column = 0;
+    column = 0; 
+
+   // print_array(list_tetriminos->tetrimino);
+   // return (0);
+   /* printf("%d \n", list_tetriminos->tetrimino[row][0]);
+    printf("%d \n", list_tetriminos->tetrimino[row][1]);
+    printf("%d \n", list_tetriminos->tetrimino[row + 1][0]);
+    printf("%d \n", list_tetriminos->tetrimino[row + 2][0]);
+    printf("END \n \n \n");
+    printf("J Inicial : %d \n \n", j + '0');
+*/
     while(list_tetriminos->tetrimino[row])
     {
         while(list_tetriminos->tetrimino[row][column])
@@ -21,9 +47,30 @@ int  try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
                 return(0);
             map[i][j] = list_tetriminos->character; //vai dar seg fault quando o map[j] == null
             if (list_tetriminos->tetrimino[row][column + 1])
+            {
+                // printf("J Dentro IF Antes:  %d \n", j + '0');
                 j = j + (list_tetriminos->tetrimino[row][column + 1] - list_tetriminos->tetrimino[row][column]);
+                printf("J Dentro IF Depois:  %d \n", j + '0');
+            }
             else if(list_tetriminos->tetrimino[row + 1] && list_tetriminos->tetrimino[row + 1][column - 1])
-                j = j - (list_tetriminos->tetrimino[row + 1][column] - list_tetriminos->tetrimino[row + 1][column - 1]);
+            {
+                //printf("J Else if Fora Antes: %d \n", j + '0');
+               // printf("Row + 1 column %d \n", list_tetriminos->tetrimino[row][column]);
+               // printf("Row + 1 column -1 column %d \n", list_tetriminos->tetrimino[row + 1][column - 1]);
+                //printf("Valor conta: %d \n", list_tetriminos->tetrimino[row + 1][column] - list_tetriminos->tetrimino[row + 1][column - 1]);
+
+
+                j = j - (list_tetriminos->tetrimino[row][column] - list_tetriminos->tetrimino[row + 1][column - 1]);
+
+                //tem proxima posicao
+                //-> row + 1 column - 1 (existe.)
+                //-> row column atual
+                printf("J Else if Fora Depois: %d \n", j + '0');
+            }
+            else
+            {
+                printf("J Fora: %d \n", j + '0');
+            }
             column++;
         }
         i += 1;
