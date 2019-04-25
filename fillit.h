@@ -5,6 +5,7 @@
 #define DOTS_PER_LINE 4
 #define HASH_SIZE 4
 #define TETRIMINO_CHARACTER '#'
+#define EMPTY_CHARACTER '.'
 
 typedef struct l_tetriminos
 {
@@ -26,3 +27,4 @@ void            build_tetrimino_array(char **tmp_arr, char *data, char keep_trac
 char            **create_map(char character, int size_per_line);
 void            print_map(char **map);
 void	        print_array(char **tmp_arr);
+char            **solver(char **map,l_tetriminos *list_tetriminos);

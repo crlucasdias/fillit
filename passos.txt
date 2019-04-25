@@ -242,3 +242,9 @@ if - ok -> Return data. (fd)
       //  printf("Next.. \n");
     }
     */
+
+
+    O que eh backtracking:
+
+    sempre q vc tem um programa q precisa de diversas solucoes
+    se vc tentar uma solucao e der merda, volta pra tentar uma nova.
