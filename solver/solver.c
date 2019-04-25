@@ -16,11 +16,49 @@ exemplo:
 
 .#..
 ###.
-
-coisa legal:
-
-o mapeamento esta funcionando corretamente, ou seja, talvez consiga resolver.
+00
 */
+
+int  get_column_value(l_tetriminos *list_tetriminos, int row, int column, int j)
+{
+    /* First interaction */
+    if (row == - 1 && column == -1)
+    {
+        if(list_tetriminos->tetrimino[1])
+        {
+            if(list_tetriminos->tetrimino[1][0] < list_tetriminos->tetrimino[0][0])
+            {
+                    j = (list_tetriminos->tetrimino[0][0] - list_tetriminos->tetrimino[1][0]) - j;
+            }
+        }
+        /* else, return (j default); */
+    }
+    /* When we have more one on the same column */
+    else if (list_tetriminos->tetrimino[row][column + 1])
+    {
+        j = j + (list_tetriminos->tetrimino[row][column + 1] - list_tetriminos->tetrimino[row][column]);
+    }
+    /* Deal when we check if need change row */
+    else if(list_tetriminos->tetrimino[row + 1])
+    { 
+        /* have new row and a previous value on column, means we need to go back */
+        if(list_tetriminos->tetrimino[row + 1][column - 1])
+        {   
+            j = j - (list_tetriminos->tetrimino[row][column] - list_tetriminos->tetrimino[row + 1][column - 1]);
+        }
+        else
+        {
+            /* When we have a new row, but with different sizes, without have a previous, that means we have something forward.
+                Otherwise will return the same j. */
+            if(list_tetriminos->tetrimino[row + 1][column] != list_tetriminos->tetrimino[row][column])
+            {
+                j = j + (list_tetriminos->tetrimino[row + 1][column] - j - '0');
+            }
+        }  
+    }
+    return (j);
+}
+
 int  try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
 {
     int row;
@@ -29,48 +67,15 @@ int  try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
 
     row = 0;
     column = 0; 
-
-   // print_array(list_tetriminos->tetrimino);
-   // return (0);
-   /* printf("%d \n", list_tetriminos->tetrimino[row][0]);
-    printf("%d \n", list_tetriminos->tetrimino[row][1]);
-    printf("%d \n", list_tetriminos->tetrimino[row + 1][0]);
-    printf("%d \n", list_tetriminos->tetrimino[row + 2][0]);
-    printf("END \n \n \n");
-    printf("J Inicial : %d \n \n", j + '0');
-*/
+    j = get_column_value(list_tetriminos, -1, -1, j);
     while(list_tetriminos->tetrimino[row])
     {
         while(list_tetriminos->tetrimino[row][column])
         {
             if(map[i][j] != EMPTY_CHARACTER)
-                return(0);
+                return(0);                
             map[i][j] = list_tetriminos->character; //vai dar seg fault quando o map[j] == null
-            if (list_tetriminos->tetrimino[row][column + 1])
-            {
-                // printf("J Dentro IF Antes:  %d \n", j + '0');
-                j = j + (list_tetriminos->tetrimino[row][column + 1] - list_tetriminos->tetrimino[row][column]);
-                printf("J Dentro IF Depois:  %d \n", j + '0');
-            }
-            else if(list_tetriminos->tetrimino[row + 1] && list_tetriminos->tetrimino[row + 1][column - 1])
-            {
-                //printf("J Else if Fora Antes: %d \n", j + '0');
-               // printf("Row + 1 column %d \n", list_tetriminos->tetrimino[row][column]);
-               // printf("Row + 1 column -1 column %d \n", list_tetriminos->tetrimino[row + 1][column - 1]);
-                //printf("Valor conta: %d \n", list_tetriminos->tetrimino[row + 1][column] - list_tetriminos->tetrimino[row + 1][column - 1]);
-
-
-                j = j - (list_tetriminos->tetrimino[row][column] - list_tetriminos->tetrimino[row + 1][column - 1]);
-
-                //tem proxima posicao
-                //-> row + 1 column - 1 (existe.)
-                //-> row column atual
-                printf("J Else if Fora Depois: %d \n", j + '0');
-            }
-            else
-            {
-                printf("J Fora: %d \n", j + '0');
-            }
+            j = get_column_value(list_tetriminos, row, column, j);
             column++;
         }
         i += 1;
@@ -128,6 +133,16 @@ char **solver(char **map,l_tetriminos *list_tetriminos)
 }
 
 
+   // print_array(list_tetriminos->tetrimino);
+   // return (0);
+   /* printf("%d \n", list_tetriminos->tetrimino[row][0]);
+    printf("%d \n", list_tetriminos->tetrimino[row][1]);
+    printf("%d \n", list_tetriminos->tetrimino[row + 1][0]);
+    printf("%d \n", list_tetriminos->tetrimino[row + 2][0]);
+    printf("END \n \n \n");
+    printf("J Inicial : %d \n \n", j + '0');
+*/
+
             /* else if (list_tetriminos->tetrimino[row + 1] && ((j + '0') < list_tetriminos->tetrimino[row + 1][0]))
             {
                   printf("entrou aqi");
@@ -169,7 +184,14 @@ quando eh o fim?
             printf("Next \n \n");
 
 
-
+//if(list_tetriminos->tetrimino[0][0] && ! list_tetriminos->tetrimino[0][1])
+      //  j = list_tetriminos->tetrimino[0][0] - j - '0';
+    printf("J inicial: %d \n", j);
+    printf("%d \n", list_tetriminos->tetrimino[row][0]);
+    printf("%d \n", list_tetriminos->tetrimino[row + 1][0]);
+    printf("%d \n", list_tetriminos->tetrimino[row + 1][1]);
+    printf("%d \n", list_tetriminos->tetrimino[row + 1][2]);
+    printf("END \n \n \n");
 int  try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
 {
     int row;
@@ -221,4 +243,12 @@ int  try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
     return (1);
 }
 
+
+
+Problema:
+
+.#..
+###.
+
+O # inicia no J, mas nesse caso, eh pra ele iniciar no j + 1
 */
