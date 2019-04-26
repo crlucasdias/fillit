@@ -1,6 +1,5 @@
 #include "../fillit.h"
 
-
 char **grow_map(char **map)
 {
 	int new_size;
