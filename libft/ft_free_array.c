@@ -19,6 +19,7 @@ void	ft_free_multidimensional_array(char **arr)
 	i = 0;
 	while(arr[i])
 	{
+		arr[i] = NULL;
 		free(arr[i]);
 		i++;
     }

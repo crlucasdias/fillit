@@ -25,6 +25,9 @@ void            tetrimino_to_list(l_tetriminos **lst, char character, char *data
 char            **create_tetrimino(char **tmp_arr, char *data);
 void            build_tetrimino_array(char **tmp_arr, char *data, char keep_track);
 char            **create_map(char character, int size_per_line);
+char            **grow_map(char **map);
+int	            get_current_map_size(char **map);
+char            **cpy_map(char **new_map, char **previous_map);
 void            print_map(char **map);
 void	        print_array(char **tmp_arr);
 char            **solver(char **map,l_tetriminos *list_tetriminos);

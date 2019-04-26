@@ -7,12 +7,12 @@ char **create_map(char character, int size_per_line)
 	int i;
 	int j;
 
-	map = malloc(sizeof(char*) * (size_per_line));
+	map = malloc(sizeof(char*) * (size_per_line) + 1);
 	if(!map)
 		return (0);
 	i = 0;
 	j = 0;
-	while(i < BUFFER_FILE / size_per_line)
+	while(i < size_per_line)
 	{
 		map[i] = malloc(sizeof(char) * size_per_line + 1);
 		while(j < size_per_line)
