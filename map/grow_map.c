@@ -14,6 +14,32 @@ char **grow_map(char **map)
 	return (new_map);
 }
 
+int	 is_map_full(char **map)
+{
+	int i;
+	int j;
+	int empty_count;
+
+	i = 0;
+	j = 0;
+	empty_count = 0;
+	while(map[i])
+	{
+		while(map[i][j])
+		{
+			if(map[i][j] == EMPTY_CHARACTER)
+				empty_count++;
+			j++;
+		}
+		j = 0;
+		i++;
+	}
+	if(empty_count < HASH_SIZE)
+		return(1);
+	else
+		return(0);
+}
+
 int	 get_current_map_size(char **map)
 {
 	int i;

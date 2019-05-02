@@ -12,7 +12,7 @@ char **create_map(char character, int size_per_line)
 		return (0);
 	i = 0;
 	j = 0;
-	while(i < size_per_line)
+	while(i < size_per_line - 1)
 	{
 		map[i] = malloc(sizeof(char) * size_per_line + 1);
 		while(j < size_per_line)
@@ -25,5 +25,6 @@ char **create_map(char character, int size_per_line)
 		i++;
 	}
 	map[i] = NULL;
+	map[size_per_line] = NULL; //i+1;
 	return (map);
 }

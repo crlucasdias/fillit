@@ -24,6 +24,7 @@ int main()
             exit(0);
         }
         solution = solver(map, list_tetriminos);
+       //print_map(solution);
     }
     else
         printf("error");

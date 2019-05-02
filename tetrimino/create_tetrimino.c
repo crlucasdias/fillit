@@ -68,6 +68,7 @@ char     **create_tetrimino(char **tmp_arr, char *data)
         tmp_arr[i] = 0;
         i++;
     }
+    tmp_arr[i] = 0;
     build_tetrimino_array(tmp_arr, data, '0');
     return (tmp_arr);
 }
