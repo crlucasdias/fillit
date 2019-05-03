@@ -34,7 +34,7 @@ int	 is_map_full(char **map)
 		j = 0;
 		i++;
 	}
-	if(empty_count < HASH_SIZE)
+	if(empty_count <= HASH_SIZE)
 		return(1);
 	else
 		return(0);

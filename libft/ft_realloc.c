@@ -12,6 +12,7 @@ char    *ft_realloc(char *str, size_t size)
     if(str)
     {
         ft_strncpy(new_str, str, size);
+        str = NULL;
         free(str);
     }
     return new_str;

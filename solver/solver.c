@@ -14,7 +14,11 @@ int  get_column_value(l_tetriminos *list_tetriminos, int row, int column, int j)
         {
             if(list_tetriminos->tetrimino[1][0] < list_tetriminos->tetrimino[0][0])
             {
-                    j = (list_tetriminos->tetrimino[0][0] - list_tetriminos->tetrimino[1][0]) - j;
+                j = j - (list_tetriminos->tetrimino[0][0] - list_tetriminos->tetrimino[1][0]);
+            }
+            else
+            {
+                j = j - list_tetriminos->tetrimino[1][0] + '0';
             }
         }
         /* else, return (j default); */
@@ -38,7 +42,7 @@ int  get_column_value(l_tetriminos *list_tetriminos, int row, int column, int j)
             Otherwise will return the same j. */
             if(list_tetriminos->tetrimino[row + 1][column] != list_tetriminos->tetrimino[row][column])
             {
-                j = j + (list_tetriminos->tetrimino[row + 1][column] - j - '0');
+                j = j + (list_tetriminos->tetrimino[row + 1][column]);
             }
         }  
     }
@@ -62,7 +66,8 @@ char  **try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
         {
             if(!new_map[i] || new_map[i][j] != EMPTY_CHARACTER)
             {
-                printf("Espaco ocupado OU Sem espaco suficiente. deal with\n"); //!new_map[i] == full
+                if(list_tetriminos->character == 'D')
+                    printf("Espaco ocupado OU Sem espaco suficiente. deal with\n"); //!new_map[i] == full
                 return(0);
             }
             new_map[i][j] = list_tetriminos->character; //vai dar seg fault quando o map[j] == null
@@ -121,6 +126,13 @@ char **solver(char **map,l_tetriminos *list_tetriminos)
         map = grow_map(map);
     //is_square && !next = fim.
     //
+
+    //talvez: 
+
+    /*
+    return solver..
+    no inicio, verifica se eh square
+    */
     while(map[i])
     {
         while(map[i][j])
@@ -129,8 +141,12 @@ char **solver(char **map,l_tetriminos *list_tetriminos)
             {
                 if((new_map = try_fillit(map,list_tetriminos, i, j)))
                 {
-                    printf("Proxima interacao: \n");
-                    print_map(new_map);
+                  //  if(list_tetriminos->character == 'D')
+                   // {
+                        //printf("Proxima interacao: \n");
+                        print_map(new_map);
+                        printf("\n");
+                    //}
                     if(list_tetriminos->next)
                     {   
                         //if(is_map_full(new_map))
@@ -142,8 +158,6 @@ char **solver(char **map,l_tetriminos *list_tetriminos)
                 else
                 {
                     //backtracking!! ;)
-                    //if(is_map_full(map))
-                      //  map = grow_map(map);
                     //else
                       //  inverte_posicoes_com_backtracking();
                 }

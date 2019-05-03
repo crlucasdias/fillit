@@ -31,6 +31,22 @@ int main()
     return (0);
 }
 
+/*
+BUG IFLHO DUMA PUTA QUE NAO TENHO IDEIA DO QUE QUE Q EH..
+
+TALVEZ DEBUGAR OCM A MERDA DO LLDB AJUDE A DESCOBRIR ESSA MERDA SEM SENTIDO
+
+FLW
+
+bug fudido:
+
+qd tem ####, o seguinte quebra a merda toda
+
+qd tem ##
+        ##
+        o ultimo fica bugado com so 2 characters
+*/
+
 
 
 
@@ -62,10 +78,10 @@ int main()
 printa_lista
 
 while(list_tetriminos)
-        {
-            print_array(list_tetriminos->tetrimino);
-            printf("Character: %c \n", list_tetriminos->character);
-            list_tetriminos = list_tetriminos->next;
-            printf("Next.. \n");
-        }
+{
+    print_array(list_tetriminos->tetrimino);
+    printf("Character: %c \n", list_tetriminos->character);
+    list_tetriminos = list_tetriminos->next;
+    printf("Next.. \n");
+}
 */

@@ -23,6 +23,7 @@ l_tetriminos *create_list_tetriminos(char *data)
         }
         i++;
     }
+
     return list_tetriminos;
 }
 
@@ -101,3 +102,26 @@ void    build_tetrimino_array(char **tmp_arr, char *data, char keep_track)
     }
 }
 
+
+
+
+/*
+
+
+    while(list_tetriminos)
+                    {
+                        if(list_tetriminos->character == 'D')
+                        {
+                            if(list_tetriminos->tetrimino[0][0] == '\0')
+                            {
+                                printf("nulo");
+                            }
+                            printf("List_tetrimin[0][0] %c \n", list_tetriminos->tetrimino[0][0]);
+                            printf("List_tetrimin[0][1] %c \n", list_tetriminos->tetrimino[0][1]);
+                            print_array(list_tetriminos->tetrimino);
+                            printf("Character: %c \n", list_tetriminos->character);
+                        }
+                        list_tetriminos = list_tetriminos->next;
+                        printf("Next.. \n");
+                    }
+*/
