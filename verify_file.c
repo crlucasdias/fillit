@@ -27,6 +27,8 @@ int verify_current_buffer(char *data)
     i = 0;
     dots = 0;
     hash = 0;
+    if(data[BUFFER_FILE - 1] != '\n')
+        return(0);
     while(data[i])
     {
         if((i == BUFFER_FILE - 1) && (data[i] != '\n'))

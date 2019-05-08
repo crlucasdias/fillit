@@ -62,15 +62,17 @@ int     is_height_full(char **map, int height_size)
     while(map[i][j] != '\n')
     {    
         if((map[i][j] != EMPTY_CHARACTER) && (!(counter >= height_size)))
-            counter = 0;
+		    counter = 0;
         else
             counter += 1;
         i++;
-        if(counter >= height_size)
+		//if(counter > height_size) eventualmente, eh contado um height e width iguais, pq sao msm posicoes. tenho q garantir que isso nao eh um problema
+        if(counter > height_size)
             return(0);
         else if(!map[i])
         {
             i = 0;
+			counter = 0;
             j++;
         }
     }
@@ -112,7 +114,7 @@ int	 is_map_full(char **map, char **tetrimino)
 	int height_size;
 
 	width_size = get_width_size(map, tetrimino);
-	height_size = get_height_size(map, tetrimino);
+	height_size = get_height_size(map, tetrimino);	
 	if(is_width_full(map, width_size) == 0 && is_height_full(map,height_size) == 0)
 		return (0);
 	return (1);
