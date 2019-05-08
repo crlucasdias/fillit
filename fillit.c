@@ -3,7 +3,7 @@
 
 #include <time.h>
 
-int main()
+int main(int argc, char **argv)
 {
     int fd;
     char *fd_file_txt;
@@ -11,8 +11,8 @@ int main()
     char **solution;
     l_tetriminos *list_tetriminos;
 
-    fd = open("valid_file.txt",O_RDONLY);
-    if(!fd)
+    fd = open(argv[1],O_RDONLY);
+    if(!fd || argc != 2)
         return (0);
     fd_file_txt = verify_file(fd);
     if(fd_file_txt)
@@ -20,16 +20,26 @@ int main()
         list_tetriminos = create_list_tetriminos(fd_file_txt);
         map = create_map('.',DOTS_PER_LINE + 1);
         //return(0);
-        clock_t t; 
-        t = clock(); 
+        //clock_t t; 
+        //t = clock();  
+
+      /*  while(list_tetriminos)
+        {
+            printf("character %c \n", list_tetriminos->character);
+           list_tetriminos = list_tetriminos->next;
+        }
+    
+        exit(0);
+    */
         if(!map || !list_tetriminos)
         {   
             printf("error");
             exit(0);
         }
         solution = solver(map, list_tetriminos);
-        t = clock() - t; 
-        double time_taken = ((double)t)/CLOCKS_PER_SEC;
+        print_map(solution);
+        //t = clock() - t; 
+        //double time_taken = ((double)t)/CLOCKS_PER_SEC;
         //printf("Tempo sem aumentar se nao conseguir try_fillit: %f\n", time_taken); 
        //print_map(solution);
     }
@@ -38,6 +48,10 @@ int main()
     return (0);
 }
 
+//alterei o verify file. checar
+/*
+    creatE_tetrimino qd n terminar com /n
+*/
 
 /* Notas:
 

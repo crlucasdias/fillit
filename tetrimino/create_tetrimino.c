@@ -12,19 +12,21 @@ l_tetriminos *create_list_tetriminos(char *data)
     character = 'A';
     i = 0;
     aux = 0;
+
     while(data[i])
     {
-        if(data[i] == '\n' && data[i + 1] == '\n')
+        if(data[i] == '\n' && (data[i + 1] == '\n' ||  data[i + 1] == '\0'))
         {
             tmp = ft_strsub(data, aux, i - aux);
+            if(!tmp)
+                break;
             tetrimino_to_list(&list_tetriminos, character, tmp);
             aux = i + 2;
             character += 1;
         }
         i++;
     }
-
-    return list_tetriminos;
+    return (list_tetriminos);
 }
 
 void    tetrimino_to_list(l_tetriminos **lst, char character, char *data)
@@ -32,6 +34,7 @@ void    tetrimino_to_list(l_tetriminos **lst, char character, char *data)
     l_tetriminos *tmp;
     char **tetrim;
 
+    tetrim = 0;
     if(!*lst)   
     {   
         *lst = list_add(*lst, character);

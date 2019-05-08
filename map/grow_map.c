@@ -14,7 +14,7 @@ char **grow_map(char **map)
 	return (new_map);
 }
 
-int	 get_height_size(char **map, char **tetrimino)
+int	 get_height_size(char **tetrimino)
 {
 	int x;
 	
@@ -23,7 +23,7 @@ int	 get_height_size(char **map, char **tetrimino)
 		x++;
 	return (x);
 }
-int  get_width_size(char **map, char **tetrimino)
+int  get_width_size(char **tetrimino)
 {
 	int i;
 	int j;
@@ -67,7 +67,7 @@ int     is_height_full(char **map, int height_size)
             counter += 1;
         i++;
 		//if(counter > height_size) eventualmente, eh contado um height e width iguais, pq sao msm posicoes. tenho q garantir que isso nao eh um problema
-        if(counter > height_size)
+        if(counter >= height_size)
             return(0);
         else if(!map[i])
         {
@@ -113,8 +113,11 @@ int	 is_map_full(char **map, char **tetrimino)
 	int width_size;
 	int height_size;
 
-	width_size = get_width_size(map, tetrimino);
-	height_size = get_height_size(map, tetrimino);	
+	width_size = get_width_size(tetrimino);
+	height_size = get_height_size(tetrimino);	
+	
+	if(width_size + height_size <= HASH_SIZE)
+		return(1);
 	if(is_width_full(map, width_size) == 0 && is_height_full(map,height_size) == 0)
 		return (0);
 	return (1);

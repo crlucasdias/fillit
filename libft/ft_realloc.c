@@ -3,8 +3,7 @@
 char    *ft_realloc(char *str, size_t size)
 {
     char *new_str;
-    int i = 0;
-    
+  
     new_str = malloc(size);
     ft_bzero(new_str,size);
     if(!new_str)

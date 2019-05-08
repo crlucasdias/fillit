@@ -13,7 +13,7 @@ char *verify_file(int fd)
         if(verify_current_buffer(data))
             txt_str = ft_strjoin(txt_str,data);
         else
-            return (0);
+            return(0);
     }
     return (txt_str);
 }
@@ -27,7 +27,7 @@ int verify_current_buffer(char *data)
     i = 0;
     dots = 0;
     hash = 0;
-    if(data[BUFFER_FILE - 1] != '\n')
+    if(data[BUFFER_FILE - 1] != '\n' && data[BUFFER_FILE - 1] != '\0')
         return(0);
     while(data[i])
     {

@@ -7,7 +7,7 @@ SRC =  $(wildcard *.c) \
 	   $(wildcard map/*.c)
 OBJ = $(SRC:.c=.o)
 
-FLAG = gcc
+FLAG = gcc -Wall -Wextra -Werror -o fillit
 
 all:	$(OBJ) 
 		$(FLAG) $(SRC)
