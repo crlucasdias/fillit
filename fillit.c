@@ -1,6 +1,7 @@
 #include "fillit.h"
 #include <fcntl.h>
 
+#include <time.h>
 
 int main()
 {
@@ -18,12 +19,18 @@ int main()
     {
         list_tetriminos = create_list_tetriminos(fd_file_txt);
         map = create_map('.',DOTS_PER_LINE + 1);
+        //return(0);
+        clock_t t; 
+        t = clock(); 
         if(!map || !list_tetriminos)
         {   
             printf("error");
             exit(0);
         }
         solution = solver(map, list_tetriminos);
+        t = clock() - t; 
+        double time_taken = ((double)t)/CLOCKS_PER_SEC;
+        //printf("Tempo sem aumentar se nao conseguir try_fillit: %f\n", time_taken); 
        //print_map(solution);
     }
     else
@@ -31,6 +38,52 @@ int main()
     return (0);
 }
 
+
+/* Notas:
+
+a[0][0]
+a[1][0]
+a[2][0]
+a[3][0]
+
+a[0][1]
+a[1][1]
+a[2][1]
+a[3][1]
+
+a[0][2]
+a[1][2]
+a[2][2]
+a[3][2]
+
+a[0][3]
+a[1][3]
+a[2][3]
+a[3][3]
+
+while(a[aux])
+{
+    while(a[i][j])
+    {
+        i++;
+        counter++;
+    }
+    if(counter >= height_size)
+        return (0);
+    j = 0;
+    counter = 0;
+    aux++;
+    i = aux;
+}
+
+return (1);
+
+1 -> Pegar tamanho do height do mapa. Problema: seg fault ao tentar acessar [i][j].
+2 -> Quando eh a primeira interacao e existe anterior. ta indo pra 5 - 2
+3 -> Is square
+4 -> Backtracking
+
+*/
 /*
 BUG IFLHO DUMA PUTA QUE NAO TENHO IDEIA DO QUE QUE Q EH..
 

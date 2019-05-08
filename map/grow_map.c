@@ -14,6 +14,119 @@ char **grow_map(char **map)
 	return (new_map);
 }
 
+int	 get_height_size(char **map, char **tetrimino)
+{
+	int x;
+	
+	x = 0;
+	while(tetrimino[x])
+		x++;
+	return (x);
+}
+int  get_width_size(char **map, char **tetrimino)
+{
+	int i;
+	int j;
+	int width;
+	int tmp;
+
+	tmp = 0;
+	i = 0;
+	j = 0;
+	width = 0;
+	while(tetrimino[i])
+	{
+		while(tetrimino[i][j])
+		{
+			tmp++;
+			j++;
+		}
+		if(width < tmp)
+			width = tmp;
+		tmp = 0;
+		j = 0;
+		i++;
+	}
+	return (width);
+}
+
+int     is_height_full(char **map, int height_size)
+{
+    int i;
+    int j;
+    int counter;
+
+    counter = 0;
+    i = 0;
+    j = 0;
+    while(map[i][j] != '\n')
+    {    
+        if((map[i][j] != EMPTY_CHARACTER) && (!(counter >= height_size)))
+            counter = 0;
+        else
+            counter += 1;
+        i++;
+        if(counter >= height_size)
+            return(0);
+        else if(!map[i])
+        {
+            i = 0;
+            j++;
+        }
+    }
+    return (1);
+}
+
+int  is_width_full(char **map, int width)
+{
+	int i;
+	int j;
+	int tmp;
+	
+	i = 0;
+	j = 0;
+	tmp = 0;
+	while(map[i])
+	{
+		while(map[i][j] != '\n')
+		{
+			if(map[i][j] != EMPTY_CHARACTER)
+				tmp = 0;
+			else
+				tmp += 1;
+			if(tmp >= width)
+				return(0);
+			j++;
+		}
+		tmp = 0;
+		j = 0;
+		i++;
+	}
+	return (1);
+}
+
+
+int	 is_map_full(char **map, char **tetrimino)
+{
+	int width_size;
+	int height_size;
+
+	width_size = get_width_size(map, tetrimino);
+	height_size = get_height_size(map, tetrimino);
+	if(is_width_full(map, width_size) == 0 && is_height_full(map,height_size) == 0)
+		return (0);
+	return (1);
+}
+
+
+/*
+
+	map[0][1]
+	map[0][0]
+	... total
+
+*/
+/*
 int	 is_map_full(char **map)
 {
 	int i;
@@ -39,6 +152,7 @@ int	 is_map_full(char **map)
 	else
 		return(0);
 }
+*/
 
 int	 get_current_map_size(char **map)
 {
@@ -77,3 +191,30 @@ char **cpy_map(char **new_map, char **previous_map)
 	}
 	return new_map;
 }
+
+
+/*
+
+while(map[i][j] != '\n')
+	{
+		if(map[i][j] == EMPTY_CHARACTER)
+		{
+			counter++;
+			if(counter >= height_size)
+			{
+				printf("Counter: %d \n", counter);
+				printf("J: %d \n", j);
+				printf("I: %d \n", i);
+				return (0);
+			}
+		}
+		i++;
+		if(!map[i])
+		{
+			i = 0;
+			counter = 0;
+			j++;
+		}
+	}
+
+	*/

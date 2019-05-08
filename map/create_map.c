@@ -7,7 +7,8 @@ char **create_map(char character, int size_per_line)
 	int i;
 	int j;
 
-	map = malloc(sizeof(char*) * (size_per_line) + 1);
+	//map = malloc(sizeof(char*) * (size_per_line) + 1);
+	map = malloc(sizeof(char*) * (size_per_line));
 	if(!map)
 		return (0);
 	i = 0;
@@ -19,12 +20,12 @@ char **create_map(char character, int size_per_line)
 		{
 			map[i][j] = (j == size_per_line - 1) ? '\n' : character;
 			j++;
-		}   
+		} 
 		map[i][j] = '\0';
 		j = 0;
 		i++;
 	}
 	map[i] = NULL;
-	map[size_per_line] = NULL; //i+1;
+	//map[size_per_line] = NULL; //i+1;
 	return (map);
 }

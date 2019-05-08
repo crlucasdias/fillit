@@ -14,11 +14,35 @@ int  get_column_value(l_tetriminos *list_tetriminos, int row, int column, int j)
         {
             if(list_tetriminos->tetrimino[1][0] < list_tetriminos->tetrimino[0][0])
             {
+
+                //problema: ele pega o primeiro da outra posicao e faz a diminuicao.
+                //5 - 2 = 3
+                if(list_tetriminos->character == 'F')
+                {
+                    printf("Row: %d \n", row);
+                    printf("Column %d \n", column);
+                    printf("list_tetriminos->tetrimino[1][0] %d \n", list_tetriminos->tetrimino[1][0]);
+                    printf("list_tetriminos->tetrimino[0][0] %d \n", list_tetriminos->tetrimino[0][0]);
+                    printf("J antes1: %d \n", j);
+                }
                 j = j - (list_tetriminos->tetrimino[0][0] - list_tetriminos->tetrimino[1][0]);
+                if(list_tetriminos->character == 'F')
+                {
+                    printf("J depois1: %d \n", j);
+                }
             }
-            else
+            else if(list_tetriminos->tetrimino[1][0] != list_tetriminos->tetrimino[0][0])
             {
-                j = j - list_tetriminos->tetrimino[1][0] + '0';
+                if(list_tetriminos->character == 'F')
+                {
+                    printf("J antes2: %d \n", j);
+                }
+                j = j - (list_tetriminos->tetrimino[1][0] - list_tetriminos->tetrimino[0][0]);
+                if(list_tetriminos->character == 'F')
+                {
+                    printf("J depois2: %d \n", j);
+                }
+                //j = j - list_tetriminos->tetrimino[1][0] + '0';
             }
         }
         /* else, return (j default); */
@@ -59,18 +83,19 @@ char  **try_fillit(char **map, l_tetriminos *list_tetriminos, int i, int j)
     row = 0;
     column = 0; 
     new_map = cpy_map(new_map, map);
-    j = get_column_value(list_tetriminos, -1, -1, j);
+    j = get_column_value(list_tetriminos, -1, -1, j);  
     while(list_tetriminos->tetrimino[row])
     {
         while(list_tetriminos->tetrimino[row][column])
         {
             if(!new_map[i] || new_map[i][j] != EMPTY_CHARACTER)
             {
-                if(list_tetriminos->character == 'D')
-                    printf("Espaco ocupado OU Sem espaco suficiente. deal with\n"); //!new_map[i] == full
+                //printf("Espaco ocupado OU Sem espaco suficiente. deal with\n"); //!new_map[i] == full
                 return(0);
             }
             new_map[i][j] = list_tetriminos->character; //vai dar seg fault quando o map[j] == null
+            print_map(new_map);
+            printf("\n");
             j = get_column_value(list_tetriminos, row, column, j);
             column++;
         }
@@ -117,22 +142,8 @@ char **solver(char **map,l_tetriminos *list_tetriminos)
     i = 0;
     j = 0;
 
-    /* Opcoes:
-    Deixa essa checagem de mapa em cada call recursiva. evitaria repetir codigo nos 2 ifs.
-    opcao 2, deixa em cada if.
-    Por performance, melhor deixar na entrada, pq cada FILLIT ele testaria o mapa, entao seria mt coisa
-    */
-    if(list_tetriminos->tetrimino && is_map_full(map))
+    if(list_tetriminos->tetrimino && is_map_full(map, list_tetriminos->tetrimino))
         map = grow_map(map);
-    //is_square && !next = fim.
-    //
-
-    //talvez: 
-
-    /*
-    return solver..
-    no inicio, verifica se eh square
-    */
     while(map[i])
     {
         while(map[i][j])
@@ -141,16 +152,10 @@ char **solver(char **map,l_tetriminos *list_tetriminos)
             {
                 if((new_map = try_fillit(map,list_tetriminos, i, j)))
                 {
-                  //  if(list_tetriminos->character == 'D')
-                   // {
-                        //printf("Proxima interacao: \n");
-                        print_map(new_map);
-                        printf("\n");
-                    //}
+                  //  print_map(new_map);
+                  //  printf("\n");
                     if(list_tetriminos->next)
                     {   
-                        //if(is_map_full(new_map))
-                          //  new_map = grow_map(new_map);
                         solver(new_map, list_tetriminos->next);
                     }
                     return (0);
