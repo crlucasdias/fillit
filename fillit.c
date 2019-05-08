@@ -11,8 +11,13 @@ int main(int argc, char **argv)
     char **solution;
     l_tetriminos *list_tetriminos;
 
+    if(argc != 2)
+    {
+        printf("usage: ./fillit ~file_name.txt");
+        exit(0);
+    }
     fd = open(argv[1],O_RDONLY);
-    if(!fd || argc != 2)
+    if(!fd)
         return (0);
     fd_file_txt = verify_file(fd);
     if(fd_file_txt)
